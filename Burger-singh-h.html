@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Burger Template - Multi Card</title>
+    <style>
+        @font-face {
+            font-family: 'MODERNIZ';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Moderniz.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Rupee';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Rupee.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Aileron';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Aileron-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'AileronBold';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Aileron-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .template-wrapper {
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+            transform-origin: top left;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            align-content: flex-start;
+            width: 1920px;
+            height: 1080px;
+            gap: 0;
+            position: relative;
+        }
+
+        .burger-card {
+
+            position: relative;
+            width: 960px;
+            height: 540px;
+            background: var(--bg-color, #D6004A);
+            flex: none;
+            flex-grow: 0;
+            overflow: hidden;
+        }
+
+        .burger-card:nth-child(1) {
+            order: 0;
+        }
+
+        .burger-card:nth-child(2) {
+            order: 1;
+        }
+
+        .burger-card:nth-child(3) {
+            order: 2;
+        }
+
+        .burger-card.empty {
+            background: #FFFFFF;
+        }
+
+        .brand-name {
+            position: absolute;
+            width: 518.5px;
+            height: 102px;
+            left: 35px;
+            top: 35px;
+            font-family: 'MODERNIZ', sans-serif;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 46.0207px;
+            line-height: 110%;
+            color: #026D53;
+        }
+
+        .brand-name br {
+            display: block;
+        }
+
+        .content-area {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .burger-image-container {
+
+            position: absolute;
+            width: 561px;
+            height: 540px;
+            left: 399px;
+            top: 0px;
+        }
+
+        .burger-image {
+            position: absolute;
+            object-fit: contain;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: rotate(90deg);
+            width: 600px;
+            height: 460px;
+        }
+
+        .burger-image-0 {
+
+            margin-left: 1.8rem;
+            margin-top: 5rem;
+        }
+
+        .burger-image-1 {
+            margin-left: 2rem;
+            margin-top: 4.5rem;
+        }
+
+        .burger-image-2 {
+            margin-left: 2rem;
+            margin-top: 4.5rem;
+        }
+
+        .price-boxes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            isolation: isolate;
+            position: absolute;
+            width: 214px;
+            height: 109px;
+            left: 35px;
+            top: 382px;
+            opacity: 1;
+        }
+
+        .price-boxes.second-box {
+            top: 239px;
+        }
+
+        .price-boxes.single-box {
+            justify-content: flex-start;
+        }
+
+        .price-boxes.multiple-boxes {
+            justify-content: space-between;
+        }
+
+        .price-box {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            width: 214px;
+            height: 89.46px;
+            background: #FFF5DC;
+            border: 0.510754px solid #040507;
+            border-radius: 12.7688px;
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+            z-index: 0;
+            overflow: visible;
+        }
+
+        .price-box.veg {
+            border-color: #333;
+        }
+
+        .price-box.chicken {
+            border-color: #333;
+        }
+
+        .price-box.mutton {
+            border-color: #333;
+        }
+
+        .category-label {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            gap: 5.11px;
+            width: 182.33px;
+            height: 39.97px;
+            background: #FFF5DC;
+            border: 0.510754px solid #040507;
+            border-radius: 6.12905px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            margin: -20.4302px 0px;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .category-label.veg {
+            color: #006B3A;
+        }
+
+        .category-label.chicken {
+            color: #D12028;
+        }
+
+        .category-label.mutton {
+            color: #D12028;
+        }
+
+        .category-label-text {
+            width: auto;
+            height: 21px;
+            font-family: 'MODERNIZ', sans-serif;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 25.5377px;
+            line-height: 34px;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .price-content {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+        }
+
+        .price-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 23.2796px 16.8549px;
+            gap: 6.13px;
+            width: 107px;
+            height: 89.46px;
+            flex: none;
+            flex-grow: 1;
+        }
+
+        .price-section:first-child {
+            border-right: 1.02151px solid #000000;
+            order: 0;
+        }
+
+        .price-section:last-child {
+            order: 1;
+        }
+
+        .price-item {
+            width: 76px;
+            height: 16px;
+            font-family: 'Aileron', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 23.081px;
+            line-height: 28px;
+            color: #303691;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .price-value {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            width: 73.29px;
+            height: 24.06px;
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+
+        .rupee-symbol {
+            width: 11px;
+            height: 14px;
+            font-family: 'Rupee', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20.4302px;
+            line-height: 24px;
+            color: #040506;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .price-number-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 1.53226px 0px;
+            gap: 5.11px;
+            width: 62.29px;
+            height: 24.06px;
+            flex: none;
+            order: 1;
+            flex-grow: 1;
+        }
+
+        .price-number {
+            width: auto;
+            height: 21px;
+            font-family: 'Aileron', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 30.6452px;
+            line-height: 37px;
+            color: #040506;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .tax-note {
+            position: absolute;
+            bottom: 4px;
+            right: 15px;
+            color: #000000;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .chili-icon {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            width: 28px;
+            height: 28px;
+            z-index: 20;
+        }
+
+        .chili-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #D32F2F;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 24px;
+        }
+
+        .error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #D32F2F;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loading" id="loading">Loading...</div>
+        <div class="error" id="error" style="display: none;"></div>
+        <div class="template-wrapper" id="templateWrapper" style="display: none;">
+            <div class="grid-container" id="gridContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - CHANGE THESE VALUES
+        // ============================================
+        // INSTRUCTIONS:
+        // 1. Get your Google Sheet ID from the URL:
+        //    https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit
+        // 2. Set the tabName to match your sheet tab name (case-sensitive)
+        // 3. Set startRow (2 = first data row, 3 = second, etc.)
+        //    This will load 3 consecutive rows (startRow, startRow+1, startRow+2)
+        // 4. Make your sheet "Anyone with the link can view" OR provide an API key
+        // ============================================
+        const CONFIG = {
+            // Google Sheet ID (extract from your sheet URL)
+            // sheetId: '1uuyQQfBjr23b6sJByRDnsy9Lyj3FpZ0U1KiO3VBk7Ts',
+            sheetId: '1yF0Pxrl3cTw49R-_nPXKBpGikqbPxACtqmQGr52nv1g',
+            
+
+            // Tab/Sheet name (the tab name in your Google Sheet)
+            tabName: 'ITEM4',
+
+            // Starting row number (1-based index, where 1 is the header row, so use 2, 3, 4, etc.)
+            // This will load 3 consecutive rows: startRow, startRow+1, startRow+2
+            startRow: 2,
+
+            // API Key (optional - only needed if sheet is private)
+            // Leave empty if sheet is public. Get API key from:
+            // https://console.cloud.google.com/apis/credentials
+            apiKey: ''
+        };
+
+        // ============================================
+        // GOOGLE SHEETS API FUNCTIONS
+        // ============================================
+
+        async function fetchSheetData() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const wrapperEl = document.getElementById('templateWrapper');
+            const gridContainer = document.getElementById('gridContainer');
+
+            try {
+                let data;
+
+                if (CONFIG.apiKey) {
+                    // Use Google Sheets API v4 (for private sheets with API key)
+                    const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.sheetId}/values/${encodeURIComponent(CONFIG.tabName)}!A1:J1000?key=${CONFIG.apiKey}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    data = json.values || [];
+                } else {
+                    // Use CSV export method (for public sheets)
+                    const url = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(CONFIG.tabName)}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}. Make sure your sheet is public (Anyone with the link can view).`);
+                    }
+
+                    const csv = await response.text();
+                    data = parseCSV(csv);
+                }
+
+                if (!data || data.length === 0) {
+                    throw new Error('No data found in sheet. Please check the tab name.');
+                }
+
+                // Get headers (first row)
+                const headers = data[0].map(h => String(h || '').trim());
+
+                // Get 3 consecutive rows
+                const rowNumbers = [CONFIG.startRow, CONFIG.startRow + 1, CONFIG.startRow + 2];
+                const itemsData = [];
+
+                for (let i = 0; i < 3; i++) {
+                    const rowNum = rowNumbers[i];
+                    if (data.length < rowNum) {
+                        throw new Error(`Row ${rowNum} not found. Sheet only has ${data.length} row(s).`);
+                    }
+
+                    const rowData = data[rowNum - 1] || [];
+
+                    // Ensure rowData has enough elements
+                    while (rowData.length < headers.length) {
+                        rowData.push('');
+                    }
+
+                    // Parse the data
+                    const itemData = parseRowData(headers, rowData);
+                    itemsData.push(itemData);
+                }
+
+                // Render the templates
+                renderTemplates(itemsData);
+
+                loadingEl.style.display = 'none';
+                wrapperEl.style.display = 'flex';
+
+                // Update scale after rendering
+                setTimeout(updateScale, 50);
+
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
+                errorEl.innerHTML = `
+                    <strong>Error:</strong> ${error.message}<br><br>
+                    <small>Please check:<br>
+                    - Sheet ID is correct<br>
+                    - Tab name matches exactly (case-sensitive)<br>
+                    - Start row number is valid<br>
+                    - Sheet has at least ${CONFIG.startRow + 2} rows<br>
+                    - Sheet is public OR API key is set</small>
+                `;
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const result = [];
+
+            for (let line of lines) {
+                if (line.trim()) {
+                    const row = [];
+                    let current = '';
+                    let inQuotes = false;
+
+                    for (let i = 0; i < line.length; i++) {
+                        const char = line[i];
+
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            row.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    row.push(current.trim());
+                    result.push(row);
+                }
+            }
+
+            return result;
+        }
+
+        function parseRowData(headers, rowData) {
+            const data = {};
+
+            headers.forEach((header, index) => {
+                const value = rowData[index] || '';
+                data[header] = value.trim();
+            });
+
+            return data;
+        }
+
+        // ============================================
+        // TEMPLATE RENDERING
+        // ============================================
+
+        function renderTemplates(itemsData) {
+            const gridContainer = document.getElementById('gridContainer');
+            gridContainer.innerHTML = '';
+
+            // Create 3 cards with order property
+            itemsData.forEach((data, index) => {
+                if (index < 3) {
+                    const card = createCard(data, null, index);
+                    card.style.order = index;
+                    gridContainer.appendChild(card);
+                }
+            });
+
+            // Add empty cell for bottom-right (if needed, but Figma shows 3 cards in a row)
+            // The flex-wrap will handle the layout automatically
+        }
+
+        function createCard(data, position, index) {
+            const card = document.createElement('div');
+            card.className = 'burger-card';
+
+            // Set background color
+            if (data.Background_Color) {
+                card.style.setProperty('--bg-color', data.Background_Color);
+            }
+
+            // Brand name
+            const brandName = document.createElement('div');
+            brandName.className = 'brand-name';
+            if (data.Item_Name) {
+                brandName.innerHTML = data.Item_Name.replace(/<br>/gi, '<br>');
+            }
+            // Set color based on Name_color or use default from CSS
+            if (data.Name_color) {
+                brandName.style.color = data.Name_color.trim();
+            }
+            card.appendChild(brandName);
+
+            // Content area
+            const contentArea = document.createElement('div');
+            contentArea.className = 'content-area';
+
+            // Burger image container
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'burger-image-container';
+            const burgerImage = document.createElement('img');
+            burgerImage.className = `burger-image burger-image-${index}`;
+            burgerImage.alt = 'Burger';
+
+            if (data.Burger_image && data.Burger_image.trim()) {
+                burgerImage.src = data.Burger_image.trim();
+                burgerImage.style.display = 'block';
+                burgerImage.onerror = function () {
+                    console.warn('Failed to load image:', data.Burger_image);
+                    this.style.display = 'none';
+                };
+                burgerImage.onload = function () {
+                    this.style.display = 'block';
+                };
+            } else {
+                burgerImage.style.display = 'none';
+            }
+
+            imageContainer.appendChild(burgerImage);
+            contentArea.appendChild(imageContainer);
+
+            // Price boxes - create separate containers for each box
+            let boxCount = 0;
+
+            // Add first price box (positioned at top: 382px)
+            if (data.Item_CategoryDOWN && data.Item_BurgerDOWN) {
+                const priceBoxes1 = document.createElement('div');
+                priceBoxes1.className = 'price-boxes';
+                const box1 = createPriceBox(
+                    data.Item_CategoryDOWN,
+                    data.Item_BurgerDOWN,
+                    data.Item_MealDOWN
+                );
+                priceBoxes1.appendChild(box1);
+                contentArea.appendChild(priceBoxes1);
+                boxCount++;
+            }
+
+            // Add second price box (if data exists, positioned at top: 239px)
+            if (data.Item_CategoryUP && data.Item_BurgerUP) {
+                const priceBoxes2 = document.createElement('div');
+                priceBoxes2.className = 'price-boxes second-box';
+                const box2 = createPriceBox(
+                    data.Item_CategoryUP,
+                    data.Item_BurgerUP,
+                    data.Item_MealUP
+                );
+                priceBoxes2.appendChild(box2);
+                contentArea.appendChild(priceBoxes2);
+                boxCount++;
+            }
+            card.appendChild(contentArea);
+
+            // Tax note
+            const taxNote = document.createElement('div');
+            taxNote.className = 'tax-note';
+            taxNote.textContent = '*Taxes Extra';
+            card.appendChild(taxNote);
+
+            // Chili icon (if spicy)
+            if (data.Spicy && (data.Spicy.toLowerCase() === 'yes' || data.Spicy.toLowerCase() === 'true')) {
+                const chiliIcon = document.createElement('div');
+                chiliIcon.className = 'chili-icon';
+                chiliIcon.innerHTML = `
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5 0C11.57 0 10 1.57 10 3.5c0 1.57.92 2.92 2.25 3.57V8c0 1.1.9 2 2 2h.5c1.1 0 2-.9 2-2v-.93C17.08 6.42 18 5.07 18 3.5 18 1.57 16.43 0 14.5 0h-1zm0 2h1c.83 0 1.5.67 1.5 1.5S15.33 5 14.5 5h-1c-.83 0-1.5-.67-1.5-1.5S12.67 2 13.5 2zM7 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2s2-.9 2-2V10c0-1.1-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2s2-.9 2-2V10c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                `;
+                card.appendChild(chiliIcon);
+            }
+
+            return card;
+        }
+
+        function createPriceBox(category, burgerPrice, mealPrice) {
+            const categoryLower = category.toLowerCase();
+
+            // Create wrapper for label and box
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.width = '214px';
+            wrapper.style.height = '109px';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.alignItems = 'center';
+
+            // Category label (Frame 8) - positioned above the box
+            const label = document.createElement('div');
+            label.className = `category-label ${categoryLower}`;
+            const labelText = document.createElement('span');
+            labelText.className = 'category-label-text';
+            labelText.textContent = category.toUpperCase();
+            label.appendChild(labelText);
+            wrapper.appendChild(label);
+
+            // Price box (Frame 7)
+            const box = document.createElement('div');
+            box.className = `price-box ${categoryLower}`;
+
+            // Price content container
+            const priceContent = document.createElement('div');
+            priceContent.className = 'price-content';
+
+            // Burger section
+            if (burgerPrice) {
+                const burgerSection = document.createElement('div');
+                burgerSection.className = 'price-section';
+
+                const burgerLabel = document.createElement('div');
+                burgerLabel.className = 'price-item';
+                burgerLabel.textContent = 'Burger';
+
+                const burgerValue = document.createElement('div');
+                burgerValue.className = 'price-value';
+
+                const rupeeSymbol1 = document.createElement('span');
+                rupeeSymbol1.className = 'rupee-symbol';
+                rupeeSymbol1.textContent = '₹';
+
+                const priceNumberWrapper1 = document.createElement('div');
+                priceNumberWrapper1.className = 'price-number-wrapper';
+                const priceNumber1 = document.createElement('span');
+                priceNumber1.className = 'price-number';
+                priceNumber1.textContent = burgerPrice;
+                priceNumberWrapper1.appendChild(priceNumber1);
+
+                burgerValue.appendChild(rupeeSymbol1);
+                burgerValue.appendChild(priceNumberWrapper1);
+
+                burgerSection.appendChild(burgerLabel);
+                burgerSection.appendChild(burgerValue);
+                priceContent.appendChild(burgerSection);
+            }
+
+            // Meal section
+            if (mealPrice) {
+                const mealSection = document.createElement('div');
+                mealSection.className = 'price-section';
+
+                const mealLabel = document.createElement('div');
+                mealLabel.className = 'price-item';
+                mealLabel.textContent = 'Meal';
+
+                const mealValue = document.createElement('div');
+                mealValue.className = 'price-value';
+
+                const rupeeSymbol2 = document.createElement('span');
+                rupeeSymbol2.className = 'rupee-symbol';
+                rupeeSymbol2.textContent = '₹';
+
+                const priceNumberWrapper2 = document.createElement('div');
+                priceNumberWrapper2.className = 'price-number-wrapper';
+                const priceNumber2 = document.createElement('span');
+                priceNumber2.className = 'price-number';
+                priceNumber2.textContent = mealPrice;
+                priceNumberWrapper2.appendChild(priceNumber2);
+
+                mealValue.appendChild(rupeeSymbol2);
+                mealValue.appendChild(priceNumberWrapper2);
+
+                mealSection.appendChild(mealLabel);
+                mealSection.appendChild(mealValue);
+                priceContent.appendChild(mealSection);
+            }
+
+            box.appendChild(priceContent);
+            wrapper.appendChild(box);
+            return wrapper;
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+
+        // Check if configuration is set
+        if (CONFIG.sheetId === 'YOUR_SHEET_ID_HERE') {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').innerHTML =
+                'Please configure the CONFIG object in the script section with your Google Sheet ID, tab name, and start row number.';
+        } else {
+            // Load data when page loads
+            fetchSheetData();
+        }
+
+
+        function updateScale() {
+            const wrapper = document.getElementById('templateWrapper');
+            if (!wrapper) return;
+
+            const scale = window.innerWidth / 1920;
+
+            wrapper.style.transform = `scale(${scale})`;
+            wrapper.style.transformOrigin = 'top left';
+
+            // THIS IS THE KEY PART
+            wrapper.style.left = '0px';
+            wrapper.style.top = '0px';
+        }
+
+
+        // Update scale on load and resize
+        window.addEventListener('load', updateScale);
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeTimeout);
+            window.resizeTimeout = setTimeout(updateScale, 100);
+        });
+    </script>
+</body>
+
+</html>
