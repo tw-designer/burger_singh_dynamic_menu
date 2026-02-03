@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<!--
+    BURGER TEMPLATE - Single File Template
+    
+    USAGE:
+    1. Open this file in a text editor
+    2. Find the CONFIG object in the <script> section
+    3. Update these values:
+       - sheetId: Your Google Sheet ID (from the URL)
+       - tabName: The tab/sheet name (e.g., "Sheet1", "Screen1", etc.)
+       - rowNumber: The row number (2 = first template, 3 = second, etc.)
+       - apiKey: Leave empty if sheet is public, or add API key for private sheets
+    
+    4. Save and open in a browser
+    
+    GOOGLE SHEET SETUP:
+    - Make sure your sheet has these columns: Item_Name, Background_Color, Burger_image,
+      Item_Category1, Item_Burger1, Item_Meal1, Item_Category2, Item_Burger2, Item_Meal2
+    - Each row represents one template
+    - Each tab represents one screen
+    - Use <br> in Item_Name for line breaks
+    
+    NOTE: Template supports 16:9 aspect ratios (1920x1080, 1280x720, 960x540) and scales automatically
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Template</title>
+    <style>
+        /* Custom fonts */
+        @font-face {
+            font-family: 'MODERNIZ';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Moderniz.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Rupee';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Rupee.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'AileronBold';
+            src: url('https://raw.githubusercontent.com/tw-designer/burger_singh_dynamic_menu/7681a20f701c2c2229ab7e7b98667a8bfc1be187/Aileron-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 16 / 9;
+        }
+
+        .template-wrapper {
+            position: relative;
+            /* width: 100vw;
+            height: 56.25vw; */
+            /* 16:9 aspect ratio */
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(-90deg);
+
+        }
+
+        @media (max-height: 56.25vw) {
+            .template-wrapper {
+                width: 177.78vh;
+                height: 100vh;
+                max-width: 1920px;
+                max-height: 1080px;
+            }
+        }
+
+        .burger-card {
+            position: relative;
+            width: 1080px;
+            height: 1920px;
+            background: var(--bg-color, #D6004A);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            /* overflow: hidden; */
+            transform-origin: center;
+        }
+
+        .brand-name {
+            color: #026D53;
+            font-family: 'MODERNIZ', sans-serif;
+            font-size: 90px;
+            font-style: normal;
+            font-weight: 900;
+            line-height: 110%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 30px;
+            padding-left: 15px;
+        }
+
+        .brand-name br {
+            display: block;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            min-height: 0;
+        }
+
+        .burger-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            min-height: 0;
+            margin-bottom: 20px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .burger-image {
+            /* max-width: 85%; */
+            max-height: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transform: rotate(90deg);
+            /* transform-origin: right bottom; */
+            margin-top: 4rem;
+            margin-right: -8.4rem;
+
+        }
+
+        .price-boxes {
+            margin-bottom: 2.5rem;
+            display: flex;
+            /* flex-direction: column; */
+            /* gap: 25px; */
+            align-items: center;
+            justify-content: space-between;
+            width: 950px;
+            /* border: 1px solid black; */
+            margin-left: 30px;
+        }
+
+        .price-boxes.single-box {
+            justify-content: flex-start;
+        }
+
+        .price-boxes.multiple-boxes {
+            justify-content: space-between;
+        }
+
+        .price-box {
+            position: relative;
+            background: #FFFEF7;
+            border-radius: 16px;
+            border: 1px solid #333;
+            padding: 0;
+            min-width: 380px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            overflow: visible;
+            font-weight: bold;
+            /* font-size: 50px; */
+            height: 173.41px;
+            
+        }
+
+        .price-box.veg {
+            border-color: 1px solid #333;
+        }
+
+        .price-box.chicken {
+            border-color: 1px solid #333;
+        }
+
+        .price-box.mutton {
+            border-color: 1px solid #333;
+        }
+
+        .category-label {
+            position: absolute;
+            left: 150px;
+            top: -70%;
+            transform: translateY(-50%);
+            transform: rotate(-90deg);
+            width: 50px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            font-weight: bolder;
+            font-family: 'MODERNIZ', sans-serif;
+            text-transform: uppercase;
+            color: #FFF5DC;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            z-index: 10;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            /* padding: 20px; */
+        }
+
+        .category-label.veg {
+            color: #0E8714;
+            background: #FFFEF7;
+            border: 1px solid black;
+        }
+
+        .category-label.chicken {
+            color: #D32F2F;
+            background: #FFFEF7;
+            border: 1px solid black;
+        }
+
+        .category-label.mutton {
+            color: #FF6B6B;
+            background: #FFFEF7;
+            border: 1px solid black;
+        }
+
+        .price-content {
+            display: flex;
+            padding: 25px 25px 25px 45px;
+        }
+
+        .price-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .price-section:first-child {
+            border-right: 1px solid #333;
+        }
+
+        .price-box.veg .price-section:first-child {
+            border-right: 1px solid #333;
+        }
+
+        .price-box.chicken .price-section:first-child {
+            border-color: 1px solid #333;
+        }
+
+        .price-box.mutton .price-section:first-child {
+            border-color: 1px solid #333;
+        }
+
+        .price-item {
+            font-size: 36px;
+            color: #1A237E;
+            margin: 8px 0;
+            text-align: center;
+            font-family: 'AileronBold', sans-serif;
+        }
+
+        .price-value {
+            /* font-weight: 100; */
+            font-size: 42px;
+            display: block;
+            margin-top: 8px;
+            /* Default font for numeric price */
+            font-family: 'AileronBold', sans-serif;
+        }
+
+        .rupee-symbol {
+            /* Rupee symbol in Rupee font */
+            font-family: 'Rupee', 'AileronBold', sans-serif;
+            font-weight: lighter;
+        }
+
+        .price-number {
+            /* Numeric part in AileronBold */
+            font-family: 'AileronBold', sans-serif;
+        }
+
+        .tax-note {
+            position: absolute;
+            bottom: 19px;
+            right: 20px;
+            color: #666;
+            font-size: 14px;
+            opacity: 0.9;
+            color: #FFF5DC;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333;
+            font-size: 24px;
+        }
+
+        .error {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #D32F2F;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loading" id="loading">Loading...</div>
+        <div class="error" id="error" style="display: none;"></div>
+        <div class="template-wrapper" id="templateWrapper" style="display: none;">
+            <div class="burger-card" id="burgerCard">
+                <div class="brand-name" id="brandName"></div>
+                <div class="content-area">
+                    <div class="burger-image-container">
+                        <img class="burger-image" id="burgerImage" alt="Burger" />
+                    </div>
+                    <div class="price-boxes" id="priceBoxes"></div>
+                </div>
+                <div class="tax-note">*Taxes Extra</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - CHANGE THESE VALUES
+        // ============================================
+        // INSTRUCTIONS:
+        // 1. Get your Google Sheet ID from the URL:
+        //    https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit
+        // 2. Set the tabName to match your sheet tab name (case-sensitive)
+        // 3. Set rowNumber (2 = first data row, 3 = second, etc.)
+        // 4. Make your sheet "Anyone with the link can view" OR provide an API key
+        // ============================================
+        const CONFIG = {
+            // Google Sheet ID (extract from your sheet URL)
+            sheetId: '1uuyQQfBjr23b6sJByRDnsy9Lyj3FpZ0U1KiO3VBk7Ts',
+
+            // Tab/Sheet name (the tab name in your Google Sheet)
+            tabName: 'SCREEN1',
+
+            // Row number (1-based index, where 1 is the header row, so use 2, 3, 4, or 5)
+            rowNumber: 3,
+
+            // API Key (optional - only needed if sheet is private)
+            // Leave empty if sheet is public. Get API key from:
+            // https://console.cloud.google.com/apis/credentials
+            apiKey: ''
+        };
+
+        // ============================================
+        // GOOGLE SHEETS API FUNCTIONS
+        // ============================================
+
+        async function fetchSheetData() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const wrapperEl = document.getElementById('templateWrapper');
+
+            try {
+                let data;
+
+                if (CONFIG.apiKey) {
+                    // Use Google Sheets API v4 (for private sheets with API key)
+                    const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.sheetId}/values/${encodeURIComponent(CONFIG.tabName)}!A1:J1000?key=${CONFIG.apiKey}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    data = json.values || [];
+                } else {
+                    // Use CSV export method (for public sheets)
+                    const url = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(CONFIG.tabName)}`;
+                    const response = await fetch(url);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}. Make sure your sheet is public (Anyone with the link can view).`);
+                    }
+
+                    const csv = await response.text();
+                    data = parseCSV(csv);
+                }
+
+                if (!data || data.length === 0) {
+                    throw new Error('No data found in sheet. Please check the tab name.');
+                }
+
+                if (data.length < CONFIG.rowNumber) {
+                    throw new Error(`Row ${CONFIG.rowNumber} not found. Sheet only has ${data.length} row(s).`);
+                }
+
+                // Get headers (first row)
+                const headers = data[0].map(h => String(h || '').trim());
+
+                // Get data row (rowNumber - 1 because array is 0-indexed)
+                const rowData = data[CONFIG.rowNumber - 1] || [];
+
+                // Ensure rowData has enough elements
+                while (rowData.length < headers.length) {
+                    rowData.push('');
+                }
+
+                // Parse the data
+                const itemData = parseRowData(headers, rowData);
+
+                // Render the template
+                renderTemplate(itemData);
+
+                loadingEl.style.display = 'none';
+                wrapperEl.style.display = 'flex';
+
+                // Update scale after rendering
+                setTimeout(updateScale, 50);
+
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
+                errorEl.innerHTML = `
+                    <strong>Error:</strong> ${error.message}<br><br>
+                    <small>Please check:<br>
+                    - Sheet ID is correct<br>
+                    - Tab name matches exactly (case-sensitive)<br>
+                    - Row number is valid<br>
+                    - Sheet is public OR API key is set</small>
+                `;
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const result = [];
+
+            for (let line of lines) {
+                if (line.trim()) {
+                    const row = [];
+                    let current = '';
+                    let inQuotes = false;
+
+                    for (let i = 0; i < line.length; i++) {
+                        const char = line[i];
+
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            row.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    row.push(current.trim());
+                    result.push(row);
+                }
+            }
+
+            return result;
+        }
+
+        function parseRowData(headers, rowData) {
+            const data = {};
+
+            headers.forEach((header, index) => {
+                const value = rowData[index] || '';
+                data[header] = value.trim();
+            });
+
+            return data;
+        }
+
+        // ============================================
+        // TEMPLATE RENDERING
+        // ============================================
+
+        function renderTemplate(data) {
+            const card = document.getElementById('burgerCard');
+            const brandName = document.getElementById('brandName');
+            const burgerImage = document.getElementById('burgerImage');
+            const priceBoxes = document.getElementById('priceBoxes');
+
+            // Set background color
+            if (data.Background_Color) {
+                card.style.setProperty('--bg-color', data.Background_Color);
+            }
+
+            // Set brand name (handle <br> tags)
+            if (data.Item_Name) {
+                brandName.innerHTML = data.Item_Name.replace(/<br>/gi, '<br>');
+            }
+
+            // Set brand name color from Google Sheet
+            if (data.Name_color) {
+                brandName.style.color = data.Name_color.trim();
+            }
+
+            // Set burger image
+            if (data.Burger_image && data.Burger_image.trim()) {
+                burgerImage.src = data.Burger_image.trim();
+                burgerImage.style.display = 'block';
+                burgerImage.onerror = function () {
+                    console.warn('Failed to load image:', data.Burger_image);
+                    this.style.display = 'none';
+                };
+                burgerImage.onload = function () {
+                    this.style.display = 'block';
+                };
+            } else {
+                burgerImage.style.display = 'none';
+            }
+
+            // Clear price boxes
+            priceBoxes.innerHTML = '';
+            priceBoxes.classList.remove('single-box', 'multiple-boxes');
+
+            let boxCount = 0;
+
+            // Add first price box
+            if (data.Item_Category1 && data.Item_Burger1) {
+                const box1 = createPriceBox(
+                    data.Item_Category1,
+                    data.Item_Burger1,
+                    data.Item_Meal1
+                );
+                priceBoxes.appendChild(box1);
+                boxCount++;
+            }
+
+            // Add second price box (if data exists)
+            if (data.Item_Category2 && data.Item_Burger2) {
+                const box2 = createPriceBox(
+                    data.Item_Category2,
+                    data.Item_Burger2,
+                    data.Item_Meal2
+                );
+                priceBoxes.appendChild(box2);
+                boxCount++;
+            }
+
+            // Apply alignment class based on number of boxes
+            if (boxCount === 1) {
+                priceBoxes.classList.add('single-box');
+            } else if (boxCount === 2) {
+                priceBoxes.classList.add('multiple-boxes');
+            }
+        }
+
+        function createPriceBox(category, burgerPrice, mealPrice) {
+            const box = document.createElement('div');
+            const categoryLower = category.toLowerCase();
+
+            box.className = `price-box ${categoryLower}`;
+
+            // Category label at top
+            const label = document.createElement('div');
+            label.className = `category-label ${categoryLower}`;
+            label.textContent = category.toUpperCase();
+            box.appendChild(label);
+
+            // Price content container
+            const priceContent = document.createElement('div');
+            priceContent.className = 'price-content';
+
+            // Burger section
+            if (burgerPrice) {
+                const burgerSection = document.createElement('div');
+                burgerSection.className = 'price-section';
+
+                const burgerLabel = document.createElement('div');
+                burgerLabel.className = 'price-item';
+                burgerLabel.textContent = 'Burger';
+
+                const burgerValue = document.createElement('div');
+                burgerValue.className = 'price-value';
+                burgerValue.innerHTML = `<span class="rupee-symbol">₹</span><span class="price-number">${burgerPrice}</span>`;
+
+                burgerSection.appendChild(burgerLabel);
+                burgerSection.appendChild(burgerValue);
+                priceContent.appendChild(burgerSection);
+            }
+
+            // Meal section
+            if (mealPrice) {
+                const mealSection = document.createElement('div');
+                mealSection.className = 'price-section';
+
+                const mealLabel = document.createElement('div');
+                mealLabel.className = 'price-item';
+                mealLabel.textContent = 'Meal';
+
+                const mealValue = document.createElement('div');
+                mealValue.className = 'price-value';
+                mealValue.innerHTML = `<span class="rupee-symbol">₹</span><span class="price-number">${mealPrice}</span>`;
+
+                mealSection.appendChild(mealLabel);
+                mealSection.appendChild(mealValue);
+                priceContent.appendChild(mealSection);
+            }
+
+            box.appendChild(priceContent);
+            return box;
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+
+        // Check if configuration is set
+        if (CONFIG.sheetId === 'YOUR_SHEET_ID_HERE') {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+            document.getElementById('error').innerHTML =
+                'Please configure the CONFIG object in the script section with your Google Sheet ID, tab name, and row number.';
+        } else {
+            // Load data when page loads
+            fetchSheetData();
+        }
+
+        // Handle responsive scaling for 16:9 aspect ratios
+        function updateScale() {
+            const card = document.getElementById('burgerCard');
+            if (!card) return;
+
+            const wrapper = document.getElementById('templateWrapper');
+            if (!wrapper) return;
+
+            const wrapperWidth = wrapper.offsetWidth;
+            const wrapperHeight = wrapper.offsetHeight;
+
+            // Base dimensions for the card (540x960)
+            const cardWidth = 540;
+            const cardHeight = 960;
+
+            // Calculate scale to fit within 16:9 container
+            // Support: 1920x1080, 1280x720, 960x540
+            const scaleX = wrapperWidth / 1920;
+            const scaleY = wrapperHeight / 1080;
+            const scale = Math.min(scaleX, scaleY);
+
+            card.style.transform = `scale(${scale})`;
+        }
+
+        // Update scale on load and resize
+        window.addEventListener('load', updateScale);
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeTimeout);
+            window.resizeTimeout = setTimeout(updateScale, 100);
+        });
+    </script>
+</body>
+
+</html>
