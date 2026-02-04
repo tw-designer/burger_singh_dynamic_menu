@@ -146,25 +146,22 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            transform: rotate(90deg);
-            width: 600px;
-            height: 460px;
+            transform: rotate(0deg);
+            /* width: 600px;
+            height: 460px; */
         }
 
         .burger-image-0 {
 
-            margin-left: 1.8rem;
-            margin-top: 5rem;
+            margin-left: 2rem;
         }
 
         .burger-image-1 {
             margin-left: 2rem;
-            margin-top: 4.5rem;
         }
 
         .burger-image-2 {
             margin-left: 2rem;
-            margin-top: 4.5rem;
         }
 
         .price-boxes {
@@ -245,6 +242,10 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
+        }
+
+        .category-label.paneer {
+            color: #006B3A;
         }
 
         .category-label.veg {
@@ -425,39 +426,15 @@
     </div>
 
     <script>
-        // ============================================
-        // CONFIGURATION - CHANGE THESE VALUES
-        // ============================================
-        // INSTRUCTIONS:
-        // 1. Get your Google Sheet ID from the URL:
-        //    https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit
-        // 2. Set the tabName to match your sheet tab name (case-sensitive)
-        // 3. Set startRow (2 = first data row, 3 = second, etc.)
-        //    This will load 3 consecutive rows (startRow, startRow+1, startRow+2)
-        // 4. Make your sheet "Anyone with the link can view" OR provide an API key
-        // ============================================
         const CONFIG = {
-            // Google Sheet ID (extract from your sheet URL)
-            // sheetId: '1uuyQQfBjr23b6sJByRDnsy9Lyj3FpZ0U1KiO3VBk7Ts',
             sheetId: '1yF0Pxrl3cTw49R-_nPXKBpGikqbPxACtqmQGr52nv1g',
-            
-
-            // Tab/Sheet name (the tab name in your Google Sheet)
             tabName: 'ITEM4',
-
-            // Starting row number (1-based index, where 1 is the header row, so use 2, 3, 4, etc.)
-            // This will load 3 consecutive rows: startRow, startRow+1, startRow+2
             startRow: 2,
-
             // API Key (optional - only needed if sheet is private)
             // Leave empty if sheet is public. Get API key from:
             // https://console.cloud.google.com/apis/credentials
             apiKey: ''
         };
-
-        // ============================================
-        // GOOGLE SHEETS API FUNCTIONS
-        // ============================================
 
         async function fetchSheetData() {
             const loadingEl = document.getElementById('loading');
